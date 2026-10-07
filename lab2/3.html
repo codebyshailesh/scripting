@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <input type="text" placeholder="Enter a number" name="num" id="num">
+    <button id="btn">print</button>
+    <div id="table" style="padding:10px;">
+    </div>
+
+    <script>
+        const btn = document.getElementById("btn");
+        btn.addEventListener('click', () => {
+            const num = document.getElementById("num").value;
+            let html = "";
+            for (i = 1; i <= 10; i++) {
+                html += `<p> ${num} x ${i} = ${num * i} </p>`;
+            }
+            document.getElementById("num").value = "";
+            document.getElementById("table").innerHTML = html;
+        })
+    </script>
+
+</body>
+
+</html>

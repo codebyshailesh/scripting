@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UI Calculator</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            height: 100vh;
+            width: 100%;
+            margin: 10px 0 0 10px;
+            background-color: #e3e3e3;
+        }
+
+        .calculator {
+            width: 320px;
+            border: 1px solid black;
+            border-radius: 10px;
+            background: white;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            padding: 20px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .display {
+            height: 50px;
+            width: 100%;
+            background: #222;
+            color: white;
+            font-size: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding: 0 15px;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .btns {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .btn {
+            height: 60px;
+            width: 60px;
+            border: 1px solid rgb(172, 172, 172);
+            border-radius: 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 20px;
+            background-color: #f0f0f0;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .btn:hover {
+            background-color: #e0e0e0;
+        }
+
+        .btn-equal {
+            width: 130px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="calculator">
+        <div class="display"></div>
+        <div class="btns"></div>
+    </div>
+
+    <script>
+        const display = document.querySelector(".display");
+        const btnsContainer = document.querySelector(".btns");
+        const btnsArr = ['7', '8', '9', ' / ', '4', '5', '6', ' * ', '1', '2', '3', ' - ', '0', '=', ' + '];
+
+        btnsArr.forEach(b => {
+            const btn = document.createElement("div");
+            if (b.trim() === "=") {
+                btn.classList.add("btn", "btn-equal");
+            } else {
+                btn.classList.add("btn");
+            }
+            btn.textContent = b;
+            btnsContainer.appendChild(btn);
+
+            btn.addEventListener("click", () => {
+
+                if (b === "=") {
+                    evaluate();
+                } else {
+                    display.textContent += b;
+                }
+            });
+        });
+
+        function evaluate() {
+            const exp = display.textContent.split(" ");
+            if (exp.length < 3) return;
+
+            const a = parseFloat(exp[0]);
+            const op = exp[1];
+            const b = parseFloat(exp[2]);
+            let result = 0;
+
+            switch (op) {
+                case '+':
+                    result = a + b;
+                    break;
+                case '-':
+                    result = a - b;
+                    break;
+                case '*':
+                    result = a * b;
+                    break;
+                case '/':
+                    result = b !== 0 ? a / b : "Error";
+                    break;
+                default:
+                    result = "Invalid";
+                    break;
+            }
+            display.textContent = result;
+        }
+
+    </script>
+</body>
+
+</html>

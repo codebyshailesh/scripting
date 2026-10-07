@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Todo</title>
+    <style>
+        .container {
+            width: 300px;
+            margin: 100px auto;
+            display: flex;
+            padding: 30px;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: #f5f5f5;
+            ;
+        }
+
+        .list {
+            width: 100%;
+            padding: 10px;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        li {
+            justify-content: space-between;
+            border-radius: 5px;
+            display: flex;
+            padding: 10px;
+            margin-bottom: 2px;
+            border: 1px solid black;
+        }
+
+        input {
+            padding: 5px;
+        }
+
+        .btn {
+            padding: 5px 10px;
+            background: rgb(202, 202, 202);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <form id="form">
+            <input type="text" name="todo" placeholder="Add Todo" />
+            <button type="submit" class="btn">Add</button>
+        </form>
+        <ul class="list"></ul>
+    </div>
+    <script>
+        const form = document.querySelector("#form");
+        const list = document.querySelector(".list");
+
+        form.addEventListener("submit", (e) => {
+            e.preventDefault();
+            if (form.todo.value == "") {
+                alert("djnl");
+                return;
+            };
+
+            // console.log(form.todo.value);
+
+            let newTodo = document.createElement("li");
+
+
+            newTodo.innerHTML = `
+              <span>${form.todo.value}</span>
+              <button class="delBtn">remove</button>
+              `;
+
+            list.appendChild(newTodo);
+            form.todo.value = "";
+        })
+
+        document.querySelector(".list").addEventListener("click", (e) => {
+            e.target.parentElement.remove();
+        })
+    </script>
+</body>
+
+</html>
